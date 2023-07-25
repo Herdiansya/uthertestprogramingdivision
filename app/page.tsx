@@ -1,95 +1,40 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import { useState } from "react";
+import "./globals.css";
+import Image from "next/image";
+import utherLogo from "../public/uther.png";
 
-export default function Home() {
+const LongestWordApp = () => {
+  const [sentence, setSentence] = useState("");
+  const [longestWord, setLongestWord] = useState("");
+
+  const findLongestWord = () => {
+    const words = sentence.split(" ");
+    let longest = "";
+    words.forEach((word) => {
+      if (word.length > longest.length) {
+        longest = word;
+      }
+    });
+    setLongestWord(longest);
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <div>
+      <Image src={utherLogo} width={200} height={200} alt="Uther Logo" className=" absolute top-2 left-3" />
+      <h1 className=" text-center text-8xl text-white mt-20">Uther Test</h1>
+      <div className=" w-auto flex justify-around mt-20 overflow-hidden">
+        <input className=" bg-white bg-opacity-20 backdrop-blur-lg w-2/5 rounded-lg p-3 " type="text" value={sentence} onChange={(e) => setSentence(e.target.value)} placeholder="Enter a sentence..." />
+        <button className=" bg-white bg-opacity-20 backdrop-blur-lg hover:bg-white w-2/5 rounded-lg" onClick={findLongestWord}>
+          Find Longest Word
+        </button>
       </div>
+      <div className=" bg-white bg-opacity-20 backdrop-blur-lg w-2/4  h-20 ml-80 mt-20">{longestWord && <p className=" pt-7 text-center ">The longest word is : {longestWord}</p>}</div>
+      <footer className=" text-center mt-20">
+        Create By Herdiansyah With <i className="fa-solid fa-heart text-red-600"></i>
+      </footer>
+    </div>
+  );
+};
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+export default LongestWordApp;
